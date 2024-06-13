@@ -3,7 +3,7 @@
 # this list, just manually change it by hand.
 from models import Shelter, Animal
 from fastapi import FastAPI
-
+ 
 app = FastAPI()
 
 shelters: list = [
@@ -26,19 +26,23 @@ shelters: list = [
 
 @app.get("/shelters")
 async def list_shelters() -> list[Shelter]:
-    pass
     return shelters
 
 @app.post("/shelters")
 async def create_shelter(shelter: Shelter):
-    pass
     shelters.append(shelter)
 
 @app.put("/shelters")
-async def update_shelter(shelter:Shelter):
-    pass
+async def update_shelter(updatedShelter: Shelter, name: str):
+    for i, index in enumerate(shelters):
+        if index.name == name:
+            shelters[i] = updatedShelter
+            return
 
 
 @app.delete("/shelters")
-async def delete_shelter():
-    pass
+async def delete_shelter(name: str):
+   for i, index in enumerate(shelters):
+        if index.name == name: 
+            shelters.pop(i)
+            return

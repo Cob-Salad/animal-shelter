@@ -8,18 +8,8 @@ class Animal(BaseModel):
     dogs: int
 
 class Shelter(BaseModel):
-    id: UUID
     name: str
     address: str
     animals: Animal
-
-
-class ShelterRequest(BaseModel):
-    name:str
-    address: str
-    animals: Animal
-
-class ShelterResponse(BaseModel):
-    id: UUID
 
 
