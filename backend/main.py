@@ -3,8 +3,25 @@
 # this list, just manually change it by hand.
 from models import Shelter, Animal
 from fastapi import FastAPI
- 
+from fastapi.middleware.cors import CORSMiddleware
+
+
 app = FastAPI()
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+    )
+
+
+
+
+
 
 shelters: list = [
     Shelter(
@@ -21,8 +38,19 @@ shelters: list = [
         name = "Animal Rescue Team",
         address = "1838 W 1020 N Ste. B, St. George, UT 84770",
         animals = Animal(cats = 4, dogs = 7)
+    ),
+        Shelter(
+        name = "cob salads rescue",
+        address = "45 north 500 east, st george, 84770",
+        animals = Animal(cats = 9, dogs = 7)
     )
 ]
+
+
+
+
+
+
 
 @app.get("/shelters")
 async def list_shelters() -> list[Shelter]:
