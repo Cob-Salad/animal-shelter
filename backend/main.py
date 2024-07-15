@@ -60,7 +60,7 @@ async def list_shelters() -> list[Shelter]:
 async def create_shelter(shelter: Shelter):
     shelters.append(shelter)
 
-@app.put("/shelters")
+@app.put("/shelters/{name}")
 async def update_shelter(updatedShelter: Shelter, name: str):
     for i, index in enumerate(shelters):
         if index.name == name:
@@ -68,7 +68,7 @@ async def update_shelter(updatedShelter: Shelter, name: str):
             return
 
 
-@app.delete("/shelters")
+@app.delete("/shelters/{name}")
 async def delete_shelter(name: str):
    for i, index in enumerate(shelters):
         if index.name == name: 
