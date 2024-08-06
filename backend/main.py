@@ -66,11 +66,14 @@ async def update_shelter(updatedShelter: Shelter, name: str):
         if index.name == name:
             shelters[i] = updatedShelter
             return
+        else:
+            shelters.append(updatedShelter)
+            return
 
 
 @app.delete("/shelters/{name}")
 async def delete_shelter(name: str):
-   for i, index in enumerate(shelters):
+    for i, index in enumerate(shelters):
         if index.name == name: 
             shelters.pop(i)
             return
